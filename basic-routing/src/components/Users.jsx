@@ -1,10 +1,32 @@
+import { useEffect, useState } from "react"
+import { NavLink, Outlet } from "react-router-dom"
 
 
 export default function Users() {
+
+  const [users, setUsers]=useState([])
+
+  useEffect(()=>{
+    fetch("https://reqres.in/api/users?page=2")
+    .then(res=>res.json())
+    .then(result=> setUsers(result.data))
+  },[])
+
   return (
     <div>
+    
       <h1>This is Users page</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia repellat alias, deserunt quisquam rem similique, aliquid sunt libero magnam atque minima laudantium distinctio deleniti vitae repellendus facilis velit ab illo cupiditate, provident aperiam perferendis ipsa error. Praesentium impedit quaerat itaque, architecto rerum tempore reiciendis commodi sint illum consequuntur excepturi accusantium totam autem tenetur, obcaecati, laboriosam pariatur dolor atque aspernatur ullam beatae vero! Nihil quae a architecto unde. Voluptate, odio beatae corrupti neque, asperiores at cupiditate aut quibusdam voluptatibus perferendis odit unde velit assumenda cum. Ratione unde impedit aut eaque labore possimus obcaecati, ab quo praesentium laborum. Velit accusantium reprehenderit vitae?</p>
+          
+      <div>
+        {users.map(user=>(
+          <li>
+            <NavLink to={`/users/${user.id}`} state={user} >{user.first_name} </NavLink>
+            </li>
+          ))}
+      
+      </div>
+      
+        <Outlet/>
     </div>
   )
 }
