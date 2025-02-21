@@ -2,12 +2,12 @@
 import ChildA from "./ChildA"
 import ChildB from "./ChildB"
 
-
+// Redux
+// Zustand
 
 
 
 function App() {
-
 
   return (
     <>
